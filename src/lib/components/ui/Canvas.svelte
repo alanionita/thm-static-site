@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-    interface Props {
-		progress: number
+	interface Props {
+		progress: number;
 	}
 
-    let { progress = 0}: Props = $props(); // Percentage (0-100)
+	let { progress = 0 }: Props = $props(); // Percentage (0-100)
 	let asset: { color?: string; radius?: number } = {
 		color: '#FF3B30',
 		radius: 20
@@ -14,12 +14,15 @@
 	let canvas: HTMLCanvasElement;
 	let ctx: CanvasRenderingContext2D;
 
+	let innerWidth = $state(0);
+	let innerHeight = $state(0);
+
 	// Define the path points (quadratic curve)
-	const path = {
-		start: { x: 50, y: 300 },
-		control: { x: 250, y: 50 },
-		end: { x: 450, y: 300 }
-	};
+	const path = $derived({
+		start: { x: 100, y: innerHeight - 100 },
+		control: { x: innerWidth / 2, y: 100 },
+		end: { x: innerWidth, y: innerHeight - 100 }
+	});
 
 	function draw() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -52,17 +55,32 @@
 		return { x, y };
 	}
 
-    onMount(() => {
+	onMount(() => {
 		ctx = canvas.getContext('2d')!;
 		draw();
 	});
 
-    $effect(() => {
-        if (progress) draw()
+	$effect(() => {
+		if (progress) draw();
 	});
 </script>
 
-<canvas bind:this={canvas} width={500} height={350} style="border: 1px solid #ddd;"></canvas>
+<svelte:window bind:innerWidth bind:innerHeight />
+<div class="relative mx-auto aspect-[16/9] w-full max-w-4xl">
+	<!-- 16:9 aspect ratio -->
+	<!-- Container with aspect ratio padding hack -->
+	<div class="relative h-0 w-full pb-[56.25%]">
+		<!-- 56.25% = 9/16 * 100 -->
+		<!-- Canvas element that fills container -->
+		<canvas
+			bind:this={canvas}
+			id="myCanvas"
+			width={innerWidth}
+			height={innerHeight}
+			class="absolute left-0 top-0 h-full w-full rounded-lg bg-gray-100 shadow-lg dark:bg-gray-800"
+		></canvas>
+	</div>
+</div>
 
 <style>
 	canvas {
