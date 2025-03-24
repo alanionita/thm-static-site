@@ -3,14 +3,7 @@
 	import * as Alert from '$lib/components/ui/alert';
 	import { Progress } from '$lib/components/ui/progress';
 	import { questions } from '$lib/questions.json';
-	import { LocalStorage } from '$lib/storage.svelte';
 	import Canvas from '@/lib/components/ui/Canvas.svelte';
-
-	// const answers = new LocalStorage('qAnswers', {
-	// 	given: [],
-	// 	lastAnswer: null,
-	// 	progress: 0
-	// });
 
 	let answers = $state({
 		current: {
@@ -36,11 +29,12 @@
 				inputError = 'Incorrect answer, please try again';
 				return;
 			}
+			inputError = '';
 			answers.current.given[qNo] = target.value;
 			answers.current.progress = Math.round(
 				(answers.current.given.length * 100) / questions.length
 			);
-			currentQuestion = target.name;
+			currentQuestion = `q_${qNo + 1}`;
 		}
 	}
 </script>
@@ -49,22 +43,15 @@
 	<Canvas progress={answers.current.progress} />
 	<Progress value={answers.current.progress} />
 
-	<Accordion.Root type="single">
+	<Accordion.Root type="single" bind:value={currentQuestion}>
 		<form>
 			{#each questions as q, qIndex}
-				<Accordion.Item value={`q_${qIndex}`}>
+				<Accordion.Item value={`q_${qIndex}`} disabled={currentQuestion !== `q_${qIndex}`}>
 					<Accordion.Trigger>{`Question ${qIndex + 1}`}</Accordion.Trigger>
 					<Accordion.Content>
 						<fieldset>
 							<legend>{q.text}</legend>
-							{#if inputError}
-								<Alert.Root>
-									<Alert.Title>Incorrect</Alert.Title>
-									<Alert.Description>
-										{inputError}
-									</Alert.Description>
-								</Alert.Root>
-							{/if}
+
 							<ul>
 								{#each q.options as o, oIndex}
 									<li>
@@ -73,6 +60,14 @@
 										</p>
 									</li>
 								{/each}
+								{#if inputError}
+									<Alert.Root>
+										<Alert.Title>Incorrect</Alert.Title>
+										<Alert.Description>
+											{inputError}
+										</Alert.Description>
+									</Alert.Root>
+								{/if}
 								<label for={`q_${qIndex}`}>Insert Answer: </label>
 								<input
 									onchange={handleChange}
