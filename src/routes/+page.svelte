@@ -5,6 +5,7 @@
 	import { Progress } from '$lib/components/ui/progress';
 	import { questions } from '$lib/questions.json';
 	import Canvas from '@/lib/components/ui/Canvas.svelte';
+	import { Input } from '$lib/components/ui/input/index.js';
 
 	let answers = $state({
 		given: [] as string[],
@@ -35,37 +36,39 @@
 	}
 </script>
 
-<main class="flex-col content-center justify-center py-32 md:container md:mx-auto">
+<Progress value={answers.progress}/>
+<main class="w-full flex-col content-center justify-center px-4 md:container md:mx-auto md:px-32">	
 	<Canvas progress={answers.progress} />
-	<Progress value={answers.progress} />
 
 	<Accordion.Root type="single" bind:value={currentQuestion}>
-		<form>
+		<form class="form">
 			{#each questions as q, qIndex}
 				<Accordion.Item value={`q_${qIndex}`} disabled={currentQuestion !== `q_${qIndex}`}>
-					<Accordion.Trigger>{`Question ${qIndex + 1}`}</Accordion.Trigger>
+					<Accordion.Trigger
+						>{`Question ${qIndex + 1} : ${q.text.substring(0, 80)}`}</Accordion.Trigger
+					>
 					<Accordion.Content>
-						<fieldset>
-							<legend>{q.text}</legend>
-
+						<fieldset class="px-4">
 							<ul>
 								{#each q.options as o, oIndex}
 									<li>
 										<p id={`q_${qIndex}_${oIndex}`} data-q={`q_${qIndex}`}>
-											{o}
+											- {o}
 										</p>
 									</li>
 								{/each}
+								<hr class="my-8" />
 								{#if inputError}
-									<Alert.Root>
+									<Alert.Root class="my-8">
 										<Alert.Title>Incorrect</Alert.Title>
 										<Alert.Description>
 											{inputError}
 										</Alert.Description>
 									</Alert.Root>
 								{/if}
-								<label for={`q_${qIndex}`}>Insert Answer: </label>
-								<input
+								<label class="my-8" for={`q_${qIndex}`}>Answer the questions below: </label>
+								<Input
+									class="my-4 p-4"
 									onchange={handleChange}
 									type="text"
 									name={`q_${qIndex}`}
@@ -81,13 +84,10 @@
 		</form>
 		{#if answers.progress == 100}
 			<Dialog.Root open={true}>
-				<!-- <Dialog.Trigger>Open</Dialog.Trigger> -->
 				<Dialog.Content>
 					<Dialog.Header>
 						<Dialog.Title>Got that coffee token!</Dialog.Title>
-						<Dialog.Description>
-							Here's your flag: [THM_ZiltoidiaAttaxx!!] 
-						</Dialog.Description>
+						<Dialog.Description>Here's your flag: [THM_ZiltoidiaAttaxx!!]</Dialog.Description>
 					</Dialog.Header>
 				</Dialog.Content>
 			</Dialog.Root>
