@@ -66,10 +66,10 @@
 </script>
 
 <svelte:window bind:innerWidth bind:innerHeight />
-<div class="relative mx-auto aspect-[16/9] w-full max-w-4xl">
+<div class="relative mx-auto w-full max-w-4xl bg-opacity-0">
 	<!-- 16:9 aspect ratio -->
 	<!-- Container with aspect ratio padding hack -->
-	<div class="relative h-0 w-full pb-[56.25%]">
+	<div class="relative h-0 w-full pb-[46.25%] bg-opacity-0">
 		<!-- 56.25% = 9/16 * 100 -->
 		<!-- Canvas element that fills container -->
 		<canvas
@@ -77,7 +77,7 @@
 			id="myCanvas"
 			width={innerWidth}
 			height={innerHeight}
-			class="absolute left-0 top-0 h-full w-full rounded-lg bg-gray-100 shadow-lg dark:bg-gray-800"
+			class="absolute left-0 top-0 h-full w-full rounded-lg bg-opacity-0"
 		></canvas>
 	</div>
 </div>

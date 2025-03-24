@@ -86,16 +86,26 @@
   height: 8px;
   width: 100%;
   background-color: var(--color-text);
-  color: #fff;
   position: sticky;
   top: 4rem;
   overflow: hidden;
   z-index: 1;
 }
 
-[data-progress-root] > div {
+[data-progress-root]>div {
   height: 8px;
   width: 100%;
   background-color: #a3ea2a;
   color: #fff;
+}
+
+[data-accordion-trigger] {
+  background-color: var(--color-main);
+  color: var(--color-text);
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
+[data-accordion-content] {
+  padding: 1rem;
 }
