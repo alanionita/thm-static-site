@@ -21,7 +21,7 @@
 	const path = $derived({
 		start: { x: 100, y: innerHeight - 100 },
 		control: { x: innerWidth / 2, y: 100 },
-		end: { x: innerWidth, y: innerHeight - 100 }
+		end: { x: innerWidth - 50, y: innerHeight - 100 }
 	});
 
 	function draw() {
@@ -31,16 +31,25 @@
 		ctx.beginPath();
 		ctx.moveTo(path.start.x, path.start.y);
 		ctx.quadraticCurveTo(path.control.x, path.control.y, path.end.x, path.end.y);
-		ctx.strokeStyle = '#666';
-		ctx.lineWidth = 2;
+		ctx.strokeStyle = '#a3ea2a';
+		ctx.lineWidth = 8;
 		ctx.stroke();
 
 		// Draw asset at current percentage
 		const point = getPointOnPath(progress);
 		ctx.beginPath();
-		ctx.arc(point.x, point.y, asset.radius || 20, 0, Math.PI * 2);
-		ctx.fillStyle = asset.color || '#FF3B30';
-		ctx.fill();
+	
+		// Set up text styling
+		ctx.font = '100px Arial';
+		ctx.textAlign = 'center';
+		ctx.textBaseline = 'middle';
+
+		// Draw ufo emoji
+		ctx.fillText('🛸', point.x, point.y);
+
+		const end = getPointOnPath(100);
+		// Draw coffee emoji
+		ctx.fillText('☕', end.x, end.y);
 	}
 
 	function getPointOnPath(percentage: number) {
