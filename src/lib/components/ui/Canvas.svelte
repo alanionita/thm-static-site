@@ -1,8 +1,12 @@
 <script lang="ts">
-	import { onMount, afterUpdate } from 'svelte';
+	import { onMount } from 'svelte';
 
-	export let progress: number = 0; // Percentage (0-100)
-	export let asset: { color?: string; radius?: number } = {
+    interface Props {
+		progress: number
+	}
+
+    let { progress = 0}: Props = $props(); // Percentage (0-100)
+	let asset: { color?: string; radius?: number } = {
 		color: '#FF3B30',
 		radius: 20
 	};
@@ -16,15 +20,6 @@
 		control: { x: 250, y: 50 },
 		end: { x: 450, y: 300 }
 	};
-
-	onMount(() => {
-		ctx = canvas.getContext('2d')!;
-		draw();
-	});
-
-	afterUpdate(() => {
-		if (ctx) draw();
-	});
 
 	function draw() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -56,6 +51,15 @@
 
 		return { x, y };
 	}
+
+    onMount(() => {
+		ctx = canvas.getContext('2d')!;
+		draw();
+	});
+
+    $effect(() => {
+        if (progress) draw()
+	});
 </script>
 
 <canvas bind:this={canvas} width={500} height={350} style="border: 1px solid #ddd;"></canvas>
