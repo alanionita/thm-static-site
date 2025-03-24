@@ -76,11 +76,7 @@
 
 <svelte:window bind:innerWidth bind:innerHeight />
 <div class="relative mx-auto w-full max-w-4xl bg-opacity-0">
-	<!-- 16:9 aspect ratio -->
-	<!-- Container with aspect ratio padding hack -->
 	<div class="relative h-0 w-full pb-[46.25%] bg-opacity-0">
-		<!-- 56.25% = 9/16 * 100 -->
-		<!-- Canvas element that fills container -->
 		<canvas
 			bind:this={canvas}
 			id="myCanvas"
