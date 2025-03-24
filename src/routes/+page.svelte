@@ -42,7 +42,7 @@
 										name={`q_${qIndex}`}
 										id={`q_${qIndex}_${oIndex}`}
 										value={o}
-										checked={answers.current[qIndex]}
+										checked={answers.current.given[qIndex]}
 									/>
 									<label for={`q_${qIndex}_${oIndex}`}>{o}</label>
 								</p>
