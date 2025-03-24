@@ -48,7 +48,8 @@
 <main class="flex-col content-center justify-center py-32 md:container md:mx-auto">
 	<Canvas progress={answers.current.progress} />
 	<Progress value={answers.current.progress} />
-	<Accordion.Root>
+
+	<Accordion.Root type="single">
 		<form>
 			{#each questions as q, qIndex}
 				<Accordion.Item value={`q_${qIndex}`}>

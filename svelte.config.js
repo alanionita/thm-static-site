@@ -25,8 +25,9 @@ const config = {
 			entries: ["*"]
 		},
 		alias: {
-			"@/components": "./src/components/*",
 			"@/lib": "./src/lib/*",
+			// "@/components": "./src/components/*",
+			// "@/*": "./src/lib/*",
 		},
 	}
 };
