@@ -1,0 +1,84 @@
+{
+    "questions": [
+        {
+            "text": "What year was “Ziltoid the Omniscient” released?",
+            "options": [
+                "1992",
+                "2004",
+                "2007",
+                "2022"
+            ],
+            "answerId": 2
+        },
+        {
+            "text": "What's the name of Ziltoid's homeworld?",
+            "options": [
+                "Ziltoidia 9",
+                "Earth",
+                "Jupiter",
+                "Jupiter"
+            ],
+            "answerId": 0
+        },
+        {
+            "text": "The album's release was accompanied by five webisode skits featuring a Ziltoid muppet. What social media platform were they originally broadcasted on?",
+            "options": [
+                "Facebook",
+                "Twitter",
+                "YouTube",
+                "MySpace"
+            ],
+            "answerId": 3
+        },
+        {
+            "text": "How were the drum tracks recorded, as the album was Townsend's solo project?",
+            "options": [
+                "Programmed on EZDrummer, a software drum machine",
+                "By Devin Townsend, who learned how to play for this album",
+                "By a hired studio drummer",
+                "There were no drum tracks"
+            ],
+            "answerId": 0
+        },
+        {
+            "text": "A sequel album to “Ziltoid the Omniscient” was released in 2014. What was its name?",
+            "options": [
+                "Ziltoidia Attaxx!!",
+                "Z^2",
+                "Ziltoid 2: Not so smart now",
+                "Ziltoid the Horrible"
+            ],
+            "answerId": 1
+        },
+        {
+            "text": "Which dimension does Ziltoid come from?",
+            "options": [
+                "The 4th Dimension",
+                "The Coffee Dimension",
+                "The Z Dimension",
+                "The Metal Dimension"
+            ],
+            "answerId": 0
+        },
+        {
+            "text": "Ziltoid searches for the ultimate cup of coffee. When he takes a sip of Earth's ultimate coffee, he is so appalled by the taste he orders his minions to attack and destroy the planet. What word does he use to describe the taste? ",
+            "options": [
+                "Horrible",
+                "Academic",
+                "Fetid",
+                "Blah"
+            ],
+            "answerId": 2
+        },
+        {
+            "text": "What weapon does Ziltoid intend to use to destroy the Earth?",
+            "options": [
+                "The death star",
+                "The hammer of Thor",
+                "The spinach cannon",
+                "The planet smasher"
+            ],
+            "answerId": 3
+        }
+    ]
+}
