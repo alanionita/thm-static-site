@@ -6,12 +6,10 @@
 	import Canvas from '@/lib/components/ui/Canvas.svelte';
 
 	let answers = $state({
-		current: {
-			given: [] as string[],
-			lastAnswer: '',
-			lastQuestion: '',
-			progress: 0
-		}
+		given: [] as string[],
+		lastAnswer: '',
+		lastQuestion: '',
+		progress: 0
 	});
 
 	let inputError: string | undefined = $state();
@@ -20,28 +18,25 @@
 	function handleChange(e: Event) {
 		const target = e.target as HTMLInputElement;
 		const qNo: number = Number(target.name.split('_')[1]);
-		const currentQ = questions[qNo];
-		if (answers.current) {
-			const correctAnsId = currentQ.answerId;
-			const correctAns = currentQ.options[correctAnsId];
 
-			if (correctAns !== target.value) {
-				inputError = 'Incorrect answer, please try again';
-				return;
-			}
-			inputError = '';
-			answers.current.given[qNo] = target.value;
-			answers.current.progress = Math.round(
-				(answers.current.given.length * 100) / questions.length
-			);
-			currentQuestion = `q_${qNo + 1}`;
+		const currentQ = questions[qNo];
+		const correctAnsId = currentQ.answerId;
+		const correctAns = currentQ.options[correctAnsId];
+
+		if (correctAns !== target.value) {
+			inputError = 'Incorrect answer, please try again';
+			return;
 		}
+		inputError = '';
+		answers.given[qNo] = target.value;
+		answers.progress = Math.round((answers.given.length * 100) / questions.length);
+		currentQuestion = `q_${qNo + 1}`;
 	}
 </script>
 
 <main class="flex-col content-center justify-center py-32 md:container md:mx-auto">
-	<Canvas progress={answers.current.progress} />
-	<Progress value={answers.current.progress} />
+	<Canvas progress={answers.progress} />
+	<Progress value={answers.progress} />
 
 	<Accordion.Root type="single" bind:value={currentQuestion}>
 		<form>
@@ -74,7 +69,7 @@
 									type="text"
 									name={`q_${qIndex}`}
 									id={`q_${qIndex}`}
-									value={answers.current.given[qIndex]}
+									value={answers.given[qIndex]}
 									disabled={currentQuestion !== `q_${qIndex}`}
 								/>
 							</ul>
