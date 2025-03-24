@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as Accordion from '$lib/components/ui/accordion/index.js';
 	import * as Alert from '$lib/components/ui/alert';
+	import * as Dialog from '$lib/components/ui/dialog/index.js';
 	import { Progress } from '$lib/components/ui/progress';
 	import { questions } from '$lib/questions.json';
 	import Canvas from '@/lib/components/ui/Canvas.svelte';
@@ -78,5 +79,18 @@
 				</Accordion.Item>
 			{/each}
 		</form>
+		{#if answers.progress == 100}
+			<Dialog.Root open={true}>
+				<!-- <Dialog.Trigger>Open</Dialog.Trigger> -->
+				<Dialog.Content>
+					<Dialog.Header>
+						<Dialog.Title>Got that coffee token!</Dialog.Title>
+						<Dialog.Description>
+							Here's your flag: [THM_ZiltoidiaAttaxx!!] 
+						</Dialog.Description>
+					</Dialog.Header>
+				</Dialog.Content>
+			</Dialog.Root>
+		{/if}
 	</Accordion.Root>
 </main>
