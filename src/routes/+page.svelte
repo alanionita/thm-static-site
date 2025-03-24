@@ -69,7 +69,7 @@
 </script>
 
 <nav class="nav">
-	<h1 class="px-2 text-2xl text-gray-200 mb-8 md:px-4 md:py-2 md:text-4xl">Ziltoid The Omniscient</h1>
+	<h1 class="px-2 text-2xl text-gray-200 md:px-4 md:py-2 md:text-4xl">Ziltoid The Omniscient</h1>
 	<Button class="m-4" variant="outline" onclick={handleRestart} data-sveltekit-reload
 		>Restart</Button
 	>
@@ -82,9 +82,9 @@
 		<form class="form">
 			{#each questions as q, qIndex}
 				<Accordion.Item value={`q_${qIndex}`}>
-					<Accordion.Trigger class="trigger">
-						{`Question ${qIndex + 1} : ${q.text.substring(0, 80)}`}
-					</Accordion.Trigger>
+					<Accordion.Trigger>
+						{`Question ${qIndex + 1} : ${q.text.length > 70 ? q.text.substring(0, 70) + '...' : q.text}`}
+					</Accordion.Trigger>	
 					<Accordion.Content>
 						<fieldset class="px-4">
 							<ul class="text-xl">
